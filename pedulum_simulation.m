@@ -1,6 +1,6 @@
-clc;
-clear;
-close all;
+% clc;
+% clear;
+% close all;
 
 %% stan poczatkowy
 x_0 = 0;
@@ -20,13 +20,18 @@ B = [0; 0; (1/M); ((-1)/(M * l))]
 C = [1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1];
 D = [0; 0; 0; 0];
 
+%%
+
+
+for l = 0:1:10
+    for fi = 0:0.1:1
+        fprintf("l: %f, fi: %f\n", l, fi)
 
 
 %% Real  model simulation
-T = 100; % czas symulacji
+T = 10; % czas symulacji
 sim_step = 0.01; %Krok symulacji
 out = sim('Pendulum_dynamics.slx', T)
-
 
 figure(1);
 subplot(2, 2, 1);
@@ -80,3 +85,5 @@ title("theta_prim");
 xlabel("Time t")
 ylabel("theta_prim")
 
+    end
+end
