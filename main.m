@@ -2,20 +2,27 @@ clc;
 clear;
 close all;
 
-%% parametry układu
-l = 1; % odleglosc punktu masowego od osi obrotu
-f_c_s = 0.61; % wspolczynnik tarcia statyczny 
-f_c_k = 0.47; % wspolczynnik tarcia kinematyczny
+%% stan poczatkowy
+x_0 = 0;
+theta_0 = 0;
 
-%% system model definition
-A = 0;
-B = 0;
+%% parametry ukladu
+m = 0.12;
+g = 9.81;
+M = 0.5723;
+l = 1;
+fi = 0.41
+
+%% macierze stanu ukladu
+
+A = [0 0 1 0; 0 0 0 1; 0 (-(m*g)/M) (-fi/M) 0; 0 (((M + m) * g)/(M * l)) (fi/(M * l)) 0]
+B = [0; 0; (1/M); ((-1)/(M * l))]
 C = [1 0 0 0; 0 1 0 0; 0 0 0 0; 0 0 0 0];
-D = 0;
+D = [0; 0; 0; 0];
 
 
 %% Symulacja modelu rzeczywistego 
-T = 10; % czas symulacji
+T = 100; % czas symulacji
 sim_step = 0.01; %Krok symulacji
 out = sim('Pendulum_dynamics.slx', T)
 
@@ -72,3 +79,8 @@ plot(out.tout, out.states(:,4));
 title("Real State Pendulum velocity");
 xlabel("Czas t")
 ylabel("Pendulum velocity")
+
+%% Model przemieszczneie wózka
+
+figure(3);
+plot(out.tout, out.model(:, 1))
