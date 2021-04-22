@@ -10,8 +10,8 @@ theta_0 = 0;
 m = 0.12;
 g = 9.81;
 M = 0.5723;
-l = 1;
-fi = 0.41
+l = 0.5;
+fi = 0.67;
 
 %% macierze stanu ukladu
 
@@ -26,6 +26,7 @@ D = [0; 0; 0; 0];
 T = 100; % czas symulacji
 sim_step = 0.01; %Krok symulacji
 out = sim('Pendulum_dynamics.slx', T)
+
 
 figure(1);
 subplot(2, 2, 1);
