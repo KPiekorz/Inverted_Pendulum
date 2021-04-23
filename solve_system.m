@@ -19,4 +19,4 @@ equ1 = (M + m)*x == F + m*l*i*(x4)^2 - m*l*j*y - fi*x3
 
 equ2 = (4/3)*l*y == m*g*i - j*x
 
-[solx,soly] = solve(equ1, equ2)
+[x, y] = solve(equ1, equ2, x, y)
