@@ -28,30 +28,30 @@ out = sim('Pendulum_dynamics.slx', T)
 
 %% Pozycja i predkosci ukladu rzeczywistego
 
-figure(1);
-subplot(2, 2, 1);
-plot(out.tout, out.cart_position);
-title("Real Cart position");
-xlabel("Czas t")
-ylabel("Cart position")
-
-subplot(2, 2, 2);
-plot(out.tout, out.cart_velocity);
-title("Real Cart velocity");
-xlabel("Czas t")
-ylabel("Cart velocity")
-
-subplot(2, 2, 3);
-plot(out.tout, out.pendulum_angle);
-title("Real Pendulum angle");
-xlabel("Czas t")
-ylabel("Pendulum angle")
-
-subplot(2, 2, 4);
-plot(out.tout, out.pendulum_velocity);
-title("Real Pendulum velocity");
-xlabel("Czas t")
-ylabel("Pendulum velocity")
+% figure(1);
+% subplot(2, 2, 1);
+% plot(out.tout, out.cart_position);
+% title("Real Cart position");
+% xlabel("Czas t")
+% ylabel("Cart position")
+% 
+% subplot(2, 2, 2);
+% plot(out.tout, out.cart_velocity);
+% title("Real Cart velocity");
+% xlabel("Czas t")
+% ylabel("Cart velocity")
+% 
+% subplot(2, 2, 3);
+% plot(out.tout, out.pendulum_angle);
+% title("Real Pendulum angle");
+% xlabel("Czas t")
+% ylabel("Pendulum angle")
+% 
+% subplot(2, 2, 4);
+% plot(out.tout, out.pendulum_velocity);
+% title("Real Pendulum velocity");
+% xlabel("Czas t")
+% ylabel("Pendulum velocity")
 
 %% Stany ukladu rzeczywistego (wektory kolumnowe zmiennej out.states)
 
@@ -80,7 +80,3 @@ title("Real State Pendulum velocity");
 xlabel("Czas t")
 ylabel("Pendulum velocity")
 
-%% Model przemieszczneie wózka
-
-figure(3);
-plot(out.tout, out.model(:, 1))
