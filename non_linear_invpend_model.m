@@ -1,4 +1,8 @@
-function [dx, y] = non_linear_invpend_model(t, x, u, m, M, g, l, fi, varargin)
+function [dx, y] = non_linear_invpend_model(t, x, u, l, fi, varargin)
+
+m = 0.5;
+M = 1;
+g = 9.81;
 
 % Output equations.
 y = [x(1);                         ... % Cart position.
@@ -14,3 +18,4 @@ dx = [x(3);                        ... % Cart velocity.
       (3 * (g*sin(x(2))*m^2 - sin(x(2))*cos(x(2))*l*m*x(4)^2 + M*g*sin(x(2))*m - u*cos(x(2)) + fi*cos(x(2))*x(3))) / (l * (-3*m*cos(x(2))^2 + 4*M + 4*m))    ... % Pendulum angular acceleration.
      ];
   
+end

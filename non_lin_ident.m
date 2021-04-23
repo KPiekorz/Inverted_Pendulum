@@ -1,13 +1,22 @@
-clc;
-clear;
-close all;
+% clc;
+% clear;
+% close all;
 
+% file_name = 'non_linear_invpend_model';
+% Order = [4 1 4];
+% Parameters = [2; 0.41]; % l fi 
+% InitialStates = [0; pi; 0; 0]; % x theta dx/dt dtheta/dt
+% 
+% sys = idnlgrey(file_name, Order, Parameters, InitialStates, 0);
+% 
+% % y_sys = sim(sys, out.data);
+% % 
+% % figure(5);
+% % plot(y_sys);
+% 
+% m2 = nlgreyest(out.data, sys);
 
+y_m2 = sim(m2, out.data);
 
-file_name = 'non_linear_invpend_model';
-Order = [4 1 4];
-Parameters = [0.5; 1; 9.81; 2; 0.41]; % m M g l fi 
-InitialStates = [0; pi; 0; 0];
-
-sys = idnlgrey(file_name, Order, Parameters, InitialStates, 0)
-
+figure(6);
+plot(y_m2);
