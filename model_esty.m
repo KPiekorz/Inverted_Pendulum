@@ -1,3 +1,4 @@
+close all;
 
 %% Data from real model for estimation
 z = out.data;
@@ -27,13 +28,13 @@ plot(z(:, 4, 1));
 
 file_name = 'non_linear_invpend_model';
 Order = [4 1 4];
-Parameters = [10; 0.1]; % l fi 
+Parameters = [0.1; 0.1]; % l fi 
 InitialStates = [0; pi; 0; 0]; % x theta dx/dt dtheta/dt
 
 nlgr = idnlgrey(file_name, Order, Parameters, InitialStates, 0);
 
-nlgr.SimulationOptions.AbsTol = 1e-15;
-nlgr.SimulationOptions.RelTol = 1e-20;
+nlgr.SimulationOptions.AbsTol = 1e-10;
+nlgr.SimulationOptions.RelTol = 1e-12;
 
 %% compare real data and estimated model output
 
