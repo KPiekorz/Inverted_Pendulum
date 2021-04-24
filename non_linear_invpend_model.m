@@ -14,8 +14,8 @@ y = [x(1);                         ... % Cart position.
 % State equations.
 dx = [x(3);                        ... % Cart velocity.
       x(4);                        ... % Pendulum angular velocity.
-      (-3*g*sin(x(2))*cos(x(2))*m^2 + 4*sin(x(2))*l*m*x(4)^2 + 4*u - 4*fi*x(3)) / (-3*m*cos(x(2))^2 + 4*M + 4*m);                                            ... % Cart acceleration.
-      (3 * (g*sin(x(2))*m^2 - sin(x(2))*cos(x(2))*l*m*x(4)^2 + M*g*sin(x(2))*m - u*cos(x(2)) + fi*cos(x(2))*x(3))) / (l * (-3*m*cos(x(2))^2 + 4*M + 4*m))    ... % Pendulum angular acceleration.
+      ((-3*g*sin(x(2))*cos(x(2))*(m^2)) + (4*sin(x(2))*l*m*(x(4)^2)) + (4*u) - (4*fi*x(3))) / ((-3*m*(cos(x(2))^2)) + (4*M) + (4*m));                                            ... % Cart acceleration.
+      (3 * ((g*sin(x(2)*(m^2)) - (sin(x(2))*cos(x(2))*l*m*x(4)^2) + (M*g*sin(x(2))*m) - (u*cos(x(2)) + (fi*cos(x(2))*x(3)))) / (l * (-3*m*cos(x(2))^2 + 4*M + 4*m))    ... % Pendulum angular acceleration.
      ];
   
 end

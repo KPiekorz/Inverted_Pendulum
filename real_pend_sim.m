@@ -21,7 +21,7 @@ C = [1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1];
 D = [0; 0; 0; 0];
 
 %% Symulacja modelu rzeczywistego 
-T = 10; % czas symulacji
+T = 100; % czas symulacji
 sim_step = 0.01; %Krok symulacji
 out = sim('Pendulum_dynamics.slx', T)
 
