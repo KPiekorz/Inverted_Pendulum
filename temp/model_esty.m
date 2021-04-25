@@ -14,7 +14,6 @@ z.TimeUnit = 's';
 figure('Name', [z.Name ': Force -> Cart position']);
 plot(z(:, 1, 1));
 
-
 figure('Name', [z.Name ': Force -> Cart position']);
 plot(z(:, 2, 1));
 
@@ -28,13 +27,13 @@ plot(z(:, 4, 1));
 
 file_name = 'non_linear_invpend_model';
 Order = [4 1 4];
-Parameters = [0.1; 0.1]; % l fi 
+Parameters = [1; 0.4]; % l fi 
 InitialStates = [0; pi; 0; 0]; % x theta dx/dt dtheta/dt
 
 nlgr = idnlgrey(file_name, Order, Parameters, InitialStates, 0);
 
-nlgr.SimulationOptions.AbsTol = 1e-10;
-nlgr.SimulationOptions.RelTol = 1e-12;
+nlgr.SimulationOptions.AbsTol = 1e-12;
+nlgr.SimulationOptions.RelTol = 1e-15;
 
 %% compare real data and estimated model output
 
@@ -43,8 +42,7 @@ compare(z, nlgr);
 
 %% parameter model estimation
 
-opt = nlgreyestOptions('SearchMethod', 'auto');
-
+opt = nlgreyestOptions('Display', 'on', 'SearchMethod', 'auto');
 opt.SearchOptions.MaxIterations = 1000;
 
 nlgr = nlgreyest(z, nlgr, opt);
