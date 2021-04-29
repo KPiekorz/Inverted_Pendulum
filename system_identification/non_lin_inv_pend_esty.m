@@ -1,85 +1,60 @@
 clc;
-clear;
 close all;
 
-%% symulacja modelu rzeczywistego w simulinku
-T = 20; % czas symulacji
-sim_step = 0.0001; %Krok symulacji
-out = sim('pendulum_dynamics.slx', T)
+%% Data from real model for estimation
+z = data;
 
-%% prezentacja wymuszenia i odpowiedzi modelu rzeczywistego
-figure(1);
-plot(out.tout, out.u, "-b");
-title("Input Cart Force")
-xlabel("Time t")
-ylabel("Force")
+z.Name = 'Inverted pendulum'
+z.InputName = 'Force';
+z.InputUnit = 'N';
+z.OutputName = {'Cart position', 'Pendulum angle', 'Cart velocity', 'Pendulum angular velocity'}
+z.OutputUnit = {'m', 'rad', 'm/s', 'rad/s'}
+z.Tstart = 0;
+z.TimeUnit = 's';
 
-figure(2);
-subplot(2, 2, 1);
-plot(out.tout, out.states(:,1), "*g");
-title("Real State Cart position");
-xlabel("Time t")
-ylabel("Cart position")
+figure('Name', [z.Name ': Force -> Cart position']);
+plot(z(:, 1, 1));
 
-subplot(2, 2, 2);
-plot(out.tout, out.states(:,3), "*g");
-title("Real State Cart velocity");
-xlabel("Time t")
-ylabel("Cart velocity")
+figure('Name', [z.Name ': Force -> Cart position']);
+plot(z(:, 2, 1));
 
-subplot(2, 2, 3);
-plot(out.tout, out.states(:,2), "*g");
-title("Real State Pendulum angle");
-xlabel("Time t")
-ylabel("Pendulum angle")
+figure('Name', [z.Name ': Force -> Cart velocity']);
+plot(z(:, 3, 1));
 
-subplot(2, 2, 4);
-plot(out.tout, out.states(:,4), "*g");
-title("Real State Pendulum velocity");
-xlabel("Time t")
-ylabel("Pendulum velocity")
+figure('Name', [z.Name ': Force -> Pendulum angular velocity']);
+plot(z(:, 4, 1));
 
-%% interpolacja stanów
+%% create non linear system model
 
-t_inter = 1:0.001:T;
-cart_pos = interp1(out.tout,out.states(:,1), t_inter);
-cart_velo = interp1(out.tout,out.states(:,3), t_inter);
-pend_pos = interp1(out.tout,out.states(:,2), t_inter);
-pend_velo = interp1(out.tout,out.states(:,4), t_inter);
+file_name = 'non_lin_inverted_pendulum';
+Order = [4 1 4];
+Parameters = [0.01955717; 0.00027344]; % l fi 
+InitialStates = [0; pi; 0; 0]; % x theta dx/dt dtheta/dt
 
-figure(3);
-subplot(2, 2, 1);
-plot(t_inter, cart_pos, "-k");
-title("Real State Cart position");
-xlabel("Time t")
-ylabel("Cart position")
+nlgr = idnlgrey(file_name, Order, Parameters, InitialStates, 0);
 
-subplot(2, 2, 2);
-plot(t_inter, cart_velo, "-k");
-title("Real State Cart velocity");
-xlabel("Time t")
-ylabel("Cart velocity")
+nlgr.SimulationOptions.AbsTol = 1e-12;
+nlgr.SimulationOptions.RelTol = 1e-15;
 
-subplot(2, 2, 3);
-plot(t_inter, pend_pos, "-k");
-title("Real State Pendulum angle");
-xlabel("Time t")
-ylabel("Pendulum angle")
+%% compare real data and estimated model output
 
-subplot(2, 2, 4);
-plot(t_inter, pend_velo, "-k");
-title("Real State Pendulum velocity");
-xlabel("Time t")
-ylabel("Pendulum velocity")
+figure('Name', [z.Name ': Inverted pendulum model before estimation']);
+compare(z, nlgr);
 
-%% stworzenie obiektu modelu do identyfikacji parametrycznej
+%% parameter model estimation
 
+opt = nlgreyestOptions('Display', 'on', 'SearchMethod', 'auto');
+opt.SearchOptions.MaxIterations = 1000;
 
-%% testowanie odpowiedzi modelu przed estymacja
+nlgr = nlgreyest(z, nlgr, opt);
 
+%% performance of evaluated model
 
-%% ientyfikacja parametrów
+nlgr.Report
+fprintf('\n\nThe search termination condition:\n')
+nlgr.Report.Termination
 
+figure('Name', [z.Name ': Inverted pendulum model after estimation']);
+compare(z, nlgr);
 
-%% testowanie odpowiedzi modelu po estymacji
-
+present(nlgr);
