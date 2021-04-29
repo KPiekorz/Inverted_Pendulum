@@ -8,11 +8,14 @@ T = 10;
 sim_step = 0.01;
 t = 0:sim_step:T;
 t = t';
-impuls = 1;
+impuls = 10;
 
 m = 0.12;
 M = 0.5723;
 g = 9.81;
+
+fi = 0.4;
+l =  0.012;
 
 %% symulacja dla różnych parametrów
 
