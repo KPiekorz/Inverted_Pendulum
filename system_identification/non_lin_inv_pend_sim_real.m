@@ -7,7 +7,7 @@ T = 10; % czas symulacji
 sim_step = 0.001; %Krok symulacji
 t = 0:sim_step:T;
 t = t';
-impuls = 1;
+impuls = 10;
 
 % out = sim('pendulum_dynamics.slx', T)
 out = sim('P1_Sim_2.slx', T);
