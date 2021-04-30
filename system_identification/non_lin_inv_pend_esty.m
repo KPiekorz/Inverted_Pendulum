@@ -29,7 +29,7 @@ plot(z(:, 4, 1));
 file_name = 'non_lin_inverted_pendulum';
 Order = [4 1 4];
 % Parameters = [1; 0.41]; % l fi 
-Parameters = [1; 0.41]; % l fi 
+Parameters = [0.3; 0.5]; % l fi 
 InitialStates = [0; pi; 0; 0]; % x theta dx/dt dtheta/dt
 
 nlgr = idnlgrey(file_name, Order, Parameters, InitialStates, 0);
