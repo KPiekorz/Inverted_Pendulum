@@ -14,8 +14,6 @@ m = 0.12;
 M = 0.5723;
 g = 9.81;
 
-fi = 0.4;
-l =  0.012;
 
 %% symulacja dla różnych parametrów
 
@@ -28,18 +26,21 @@ figure(1);
 for i = 1:iter
     for j = 1:iter
 
+        fi = 0.1;
+        l =  0.00001;
 %         fi = fric(i);
 %         l = len(j);
         fprintf("Tarcie: %d, Dlugosc: %d\n", fi, l);
         
 
         sim("non_lin_model_P1_Sim_2_compare");
-        hold on;
         subplot(1, 2, 1);
-        plot(non_lin_model_states);
+        hold on;
+        plot(non_lin_model_states(:, 1));
         title("Non lin model");
         subplot(1, 2, 2);
-        plot(real_states);
+        hold on;
+        plot(real_states(:, 1));
         title("Real model");
     end
 end
