@@ -14,6 +14,8 @@ syms x y x3 x4 x1 x2 m M l F fi g i j
 % i = sin(x2)
 % j = cos(x2)
 
+% I = 1/3*m*(l^2)
+
 equ1 = (M + m)*x == F + (m*l*i*(x4)^2) - (m*l*j*y) - (fi*x3)
 
 equ2 = (4/3)*l*y == (g*i) - (j*x)

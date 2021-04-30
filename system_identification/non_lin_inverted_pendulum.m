@@ -2,13 +2,19 @@ function [dx, y] = non_lin_inverted_pendulum(t, x, u, l, fi, varargin)
 
 m = 0.12;
 M = 0.5723;
+% M = 0.7723;
 g = 9.81;
+
+% x(2) = x(2) * (-1) + pi;
+% x(2) = x(2) * (-1);
+% x(4) = x(4) * (-1);
+
 
 % Output equations.
 y = [x(1);                         ... % Cart position.
-     x(2);                         ... % Pendulum angle.
+     ((-1) * x(2)) + (2*pi);                         ... % Pendulum angle.
      x(3);                         ... % Cart velocity.
-     x(4)                          ... % Pendulum angular velocity.
+     (-1) * x(4)                          ... % Pendulum angular velocity.
     ];
 
 % State equations.

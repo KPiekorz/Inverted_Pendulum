@@ -29,7 +29,11 @@ plot(z(:, 4, 1));
 file_name = 'non_lin_inverted_pendulum';
 Order = [4 1 4];
 % Parameters = [1; 0.41]; % l fi 
-Parameters = [0.3; 0.5]; % l fi 
+% Parameters = [0.3; 0.5]; % l fi 
+% Parameters = [0.2; 0.5]; % l fi 
+
+Parameters = [0.3; 0.6]; % l fi 
+
 InitialStates = [0; pi; 0; 0]; % x theta dx/dt dtheta/dt
 
 nlgr = idnlgrey(file_name, Order, Parameters, InitialStates, 0);
@@ -46,6 +50,7 @@ compare(z, nlgr);
 
 opt = nlgreyestOptions('Display', 'on', 'SearchMethod', 'auto');
 opt.SearchOptions.MaxIterations = 1000;
+
 
 nlgr = nlgreyest(z, nlgr, opt);
 
