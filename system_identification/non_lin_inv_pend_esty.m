@@ -2,7 +2,7 @@ clc;
 close all;
 
 %% Data from real model for estimation
-z = data;
+z = iddata_real_model;
 
 z.Name = 'Inverted pendulum'
 z.InputName = 'Force';
