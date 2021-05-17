@@ -2,7 +2,7 @@ clear all; close all;
 
 % parameters
 m = 0.12;
-M = 0.5723;
+MM = 0.5723;
 g = 9.81;
 
 % l and gamma2 from identification
@@ -12,9 +12,9 @@ l = 0.512166;
 % state matrices after linearization
 A = [0          0           1           0;
      0          0           0           1;
-     0      -(m*g/M)    -gamma2/M       0;
-     0    g*((M+m))/(M*l)   gamma2/(M*l)    0];
-B = [0 0 1/M -1/(M*l)]';
+     0      -(m*g/MM)    -gamma2/MM       0;
+     0  g*((MM+m))/(MM*l) gamma2/(MM*l)    0];
+B = [0 0 1/MM -1/(MM*l)]';
 C = [1 1 1 1];
 D = 0;
 
@@ -26,20 +26,20 @@ rank(ct);                       % n=4: controllable
 
 % lqr coefficients calculation
 Q = [1 0 0 0;                   % "importance" of x state (low)
-     0 1000 0 0;                % "importance" of theta state (high)
+     0 100 0 0;                   % "importance" of theta state (high)
      0 0 1 0;                   % x' doesnt matter
      0 0 0 1];                  % theta' doesnt matter
-R = 10;                         % control limitation (low)
+R = 1;                          % control limitation (low)
 
 K = lqr(A,B,Q,R);               % LQ regulator parameters
 disp(['K = [',num2str(K(1)),',',num2str(K(2)),',',num2str(K(3)),',',num2str(K(4)),'];']);
+K = [-1, -1.7, -1, -1.7];
 % K(4) = K(4)/100;
 % K(3) = K(3)/100;
 % set simulation time, initial conditions and simulate 
-t = 200;
-init_cond = [0 pi/20 0 0];
+t = 20;
+init_cond = [0 pi/100 0 0];
 stab_point = [0 0 0 0];
-low_stab_point = [0 pi 0 0];
 amplitude = 0.7;
 %% simulate
 sim('P1_Sim_2.slx');
@@ -60,6 +60,7 @@ plot(time, pendulum_angle_conv);
 hold on
 plot(time, states(:,2));
 title('angle');
+ylabel('stopnie');
 subplot(3,2,5)
 plot(time, states(:,3));
 title('velocity');
