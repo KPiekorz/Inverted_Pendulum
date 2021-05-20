@@ -38,7 +38,7 @@ K = [-1, -1.7, -1, -1.7];
 % K(3) = K(3)/100;
 % set simulation time, initial conditions and simulate 
 t = 20;
-init_cond = [0 pi/100 0 0];
+init_cond = [0 pi 0 0];
 stab_point = [0 0 0 0];
 amplitude = 0.7;
 %% simulate
