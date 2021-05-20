@@ -1,7 +1,7 @@
 clear all;
 close all;
 
-T = 100; % s
+T = 150; % s
 step = 0.01; % s
 
 l = 0.512166;
