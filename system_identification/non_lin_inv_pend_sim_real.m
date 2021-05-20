@@ -1,8 +1,10 @@
+
+%% symulacja modelu rzeczywistego w simulinku
+
 clc;
 clear;
 close all;
 
-%% symulacja modelu rzeczywistego w simulinku
 T = 10; % czas symulacji
 sim_step = 0.001; %Krok symulacji
 t = 0:sim_step:T;
@@ -10,7 +12,27 @@ t = t';
 impuls = 10;
 
 % out = sim('pendulum_dynamics.slx', T)
-out = sim('P1_Sim_2.slx', T);
+out_real_model = sim('P1_Sim_2.slx', T);
+
+%% symulacja modelu nie liniowego 
+
+clc;
+clear;
+close all;
+
+T = 10; % czas symulacji
+sim_step = 0.001; %Krok symulacji
+t = 0:sim_step:T;
+t = t';
+
+m = 0.5;
+M = 1;
+g = 9.81;
+
+fi = 0.41;
+l = 1;
+
+% out = sim('non_linear_model.slx', T);
 
 %% prezentacja wymuszenia i odpowiedzi modelu rzeczywistego
 figure(1);
