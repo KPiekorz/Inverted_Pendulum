@@ -4,6 +4,7 @@ clear all; close all;
 m = 0.12;
 MM = 0.5723;
 g = 9.81;
+M= 0.5723;
 
 % l and gamma2 from identification
 gamma2 = 0.267534;
@@ -27,18 +28,18 @@ rank(ct);                       % n=4: controllable
 % lqr coefficients calculation
 Q = [1 0 0 0;                   % "importance" of x state (low)
      0 100 0 0;                   % "importance" of theta state (high)
-     0 0 1 0;                   % x' doesnt matter
-     0 0 0 1];                  % theta' doesnt matter
+     0 0 10 0;                   % x' doesnt matter
+     0 0 0 100];                  % theta' doesnt matter
 R = 1;                          % control limitation (low)
 
 K = lqr(A,B,Q,R);               % LQ regulator parameters
 disp(['K = [',num2str(K(1)),',',num2str(K(2)),',',num2str(K(3)),',',num2str(K(4)),'];']);
-K = [-1, -1.7, -1, -1.7];
+%K = [-1, -1.7, -1, -1.7];
 % K(4) = K(4)/100;
 % K(3) = K(3)/100;
 % set simulation time, initial conditions and simulate 
-t = 20;
-init_cond = [0 pi/100 0 0];
+t = 50;
+init_cond = [0 pi/50 0.1 0.1];
 stab_point = [0 0 0 0];
 amplitude = 0.7;
 %% simulate
