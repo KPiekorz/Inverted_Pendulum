@@ -38,12 +38,12 @@ disp(['K = [',num2str(K(1)),',',num2str(K(2)),',',num2str(K(3)),',',num2str(K(4)
 % K(4) = K(4)/100;
 % K(3) = K(3)/100;
 % set simulation time, initial conditions and simulate 
-t = 50;
-init_cond = [0 pi/50 0.1 0.1];
+t = 20;
+init_cond = [0 pi/30 0 0];
 stab_point = [0 0 0 0];
 amplitude = 0.7;
 %% simulate
-sim('P1_Sim_2.slx');
+sim('P1_Sim_2_1.slx');
 
 u_states = [u,states];
 % state and control observation
