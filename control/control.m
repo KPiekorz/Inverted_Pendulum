@@ -4,7 +4,7 @@ clear all; close all;
 m = 0.12;
 MM = 0.5723;
 g = 9.81;
-M= 0.5723;
+%M= 0.5723;
 
 % l and gamma2 from identification
 gamma2 = 0.267534;
@@ -38,9 +38,9 @@ disp(['K = [',num2str(K(1)),',',num2str(K(2)),',',num2str(K(3)),',',num2str(K(4)
 % K(4) = K(4)/100;
 % K(3) = K(3)/100;
 % set simulation time, initial conditions and simulate 
-t = 20;
+t = 50;
 
-init_cond = [0 pi/30 0 0];
+init_cond = [0 pi 0 0];
 
 stab_point = [0 0 0 0];
 amplitude = 0.7;
@@ -48,6 +48,7 @@ amplitude = 0.7;
 sim('P1_Sim_2_1.slx');
 
 u_states = [u,states];
+errors_u = [error_x, error_theta, error_dx,u];
 % state and control observation
 time = 0:0.01:t;
 close(figure(1));
@@ -60,7 +61,7 @@ plot(time, states(:,1));
 title('displacement');
 subplot(3,2,4)
 plot(time, pendulum_angle_conv);
-hold on
+hold on; grid on;
 plot(time, states(:,2));
 title('angle');
 ylabel('stopnie');
