@@ -13,8 +13,8 @@ l = 0.512166;
 % state matrices after linearization
 A = [0          0           1           0;
      0          0           0           1;
-     0      -(m*g/MM)    -gamma2/MM       0;
-     0  g*((MM+m))/(MM*l) gamma2/(MM*l)    0];
+     0      -(m*g/MM)    -gamma2/MM     0;
+     0  g*((MM+m))/(MM*l) gamma2/(MM*l) 0];
 B = [0 0 1/MM -1/(MM*l)]';
 C = [1 1 1 1];
 D = 0;
@@ -26,11 +26,11 @@ ct = ctrb(A,B);
 rank(ct);                       % n=4: controllable
 
 % lqr coefficients calculation
-Q = [1 0 0 0;                   % "importance" of x state (low)
-     0 100 0 0;                   % "importance" of theta state (high)
-     0 0 10 0;                   % x' doesnt matter
-     0 0 0 100];                  % theta' doesnt matter
-R = 1;                          % control limitation (low)
+Q = [10 0 0 0;                   
+     0 100 0 0;                   
+     0 0 10 0;                   
+     0 0 0 100];                
+R = 1;                          
 
 K = lqr(A,B,Q,R);               % LQ regulator parameters
 disp(['K = [',num2str(K(1)),',',num2str(K(2)),',',num2str(K(3)),',',num2str(K(4)),'];']);
@@ -38,10 +38,9 @@ disp(['K = [',num2str(K(1)),',',num2str(K(2)),',',num2str(K(3)),',',num2str(K(4)
 % K(4) = K(4)/100;
 % K(3) = K(3)/100;
 % set simulation time, initial conditions and simulate 
-t = 50;
+t = 100;
 
 init_cond = [0 pi 0 0];
-
 stab_point = [0 0 0 0];
 amplitude = 0.7;
 %% simulate
@@ -57,14 +56,17 @@ subplot(3,2,1:2)
 plot(time,u);
 title('control');
 subplot(3,2,3)
+%states(1:2100,1)=states(1:2100,1)./4;
 plot(time, states(:,1));
 title('displacement');
+%axis([0 t -2 2]);
 subplot(3,2,4)
 plot(time, pendulum_angle_conv);
 hold on; grid on;
 plot(time, states(:,2));
 title('angle');
-ylabel('stopnie');
+ylabel('rad');
+%axis([0 t -pi/4 pi/4]);
 subplot(3,2,5)
 plot(time, states(:,3));
 title('velocity');
