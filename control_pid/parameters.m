@@ -1,7 +1,8 @@
 clear all;
 close all;
+beep off;
 
-T = 150; % s
+T = 300; % s
 step = 0.01; % s
 
 l = 0.512166;
