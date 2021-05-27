@@ -3,7 +3,7 @@ close all;
 clc;
 beep off;
 
-T = 1000; % s
+T = 500; % s
 step = 0.01; % s
 int_tolerance = 0.001;
 
