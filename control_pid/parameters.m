@@ -1,9 +1,11 @@
 clear all;
 close all;
+clc;
 beep off;
 
-T = 300; % s
+T = 1000; % s
 step = 0.01; % s
+int_tolerance = 0.001;
 
 l = 0.512166;
 fi = 0.267534;
