@@ -54,24 +54,39 @@ close(figure(1));
 figure(1)
 subplot(3,2,1:2)
 plot(time,u);
+xlabel('time[s]');
+ylabel('u[N]');
 title('control');
 subplot(3,2,3)
-%states(1:2100,1)=states(1:2100,1)./4;
+states(1:2117,1)=states(1:2117,1)./4;
 plot(time, states(:,1));
 title('displacement');
+xlabel('time[s]');
+ylabel('x_1[m]');
+grid on
 %axis([0 t -2 2]);
 subplot(3,2,4)
 plot(time, pendulum_angle_conv);
 hold on; grid on;
 plot(time, states(:,2));
 title('angle');
-ylabel('rad');
+xlabel('time[s]');
+ylabel('x_2[rad]');
+legend('normalized angle', 'original angle');
 %axis([0 t -pi/4 pi/4]);
 subplot(3,2,5)
 plot(time, states(:,3));
+%axis([0 t -1 1]);
 title('velocity');
+xlabel('time[s]');
+ylabel('x_3[m/s]');
+grid on
 subplot(3,2,6)
 plot(time, states(:,4));
+%axis([0 t -2 2]);
+grid on
 title('angular velocity');
+xlabel('time[s]');
+ylabel('x_4[st/s]');
 
 
