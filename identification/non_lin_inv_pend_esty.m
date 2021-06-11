@@ -7,22 +7,22 @@ z = iddata_real_model;
 z.Name = 'Inverted pendulum'
 z.InputName = 'Force';
 z.InputUnit = 'N';
-z.OutputName = {'Cart position', 'Pendulum angle', 'Cart velocity', 'Pendulum angular velocity'}
+z.OutputName = {'Cart position [m]', 'Pendulum angle [rad]', 'Cart velocity [m/s]', 'Pendulum angular velocity [rad/s]'}
 z.OutputUnit = {'m', 'rad', 'm/s', 'rad/s'}
 z.Tstart = 0;
 z.TimeUnit = 's';
 
-figure('Name', [z.Name ': Force -> Cart position']);
-plot(z(:, 1, 1));
-
-figure('Name', [z.Name ': Force -> Cart position']);
-plot(z(:, 2, 1));
-
-figure('Name', [z.Name ': Force -> Cart velocity']);
-plot(z(:, 3, 1));
-
-figure('Name', [z.Name ': Force -> Pendulum angular velocity']);
-plot(z(:, 4, 1));
+% figure('Name', [z.Name ': Force -> Cart position']);
+% plot(z(:, 1, 1));
+% 
+% figure('Name', [z.Name ': Force -> Cart position']);
+% plot(z(:, 2, 1));
+% 
+% figure('Name', [z.Name ': Force -> Cart velocity']);
+% plot(z(:, 3, 1));
+% 
+% figure('Name', [z.Name ': Force -> Pendulum angular velocity']);
+% plot(z(:, 4, 1));
 
 %% create non linear system model
 
